@@ -38,8 +38,8 @@ public class BasicHttpAttack implements Attack {
 				con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
  
 				String userId = java.util.UUID.randomUUID().toString();
-				double latitude = random.nextDouble();
-				double longitude = random.nextDouble();
+				double latitude = 32d+random.nextDouble();
+				double longitude = 34+random.nextDouble();
 				String urlParameters = "{\"userId\":\""+userId+"\",\"latitude\":"+latitude+",\"longitude\":"+longitude+"}";
  
 				// Send post request
