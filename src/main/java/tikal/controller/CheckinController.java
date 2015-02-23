@@ -15,7 +15,7 @@ import tikal.model.Checkin;
 public class CheckinController {
 	
 	@RequestMapping(value="/checkin",method=RequestMethod.POST)
-	public Object addComment(@RequestBody final Checkin checkin) {
+	public Object checkin(@RequestBody final Checkin checkin) {
 		checkin.setTimestamp(System.currentTimeMillis());
 		System.out.println(checkin);
 		return true;
