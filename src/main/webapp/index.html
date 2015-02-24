@@ -5,21 +5,44 @@
     <meta charset="UTF-8">
     <title>Attack and Destroy</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-</head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 
-<body ng-controller="MainController">
 
-    <map-display></map-display>
+    <body ng-controller="MainController">
 
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/scripts/app.js"></script>
-    <script src="/scripts/ctrl/MainController.ctrl.js"></script>
-    <script src="/scripts/ctrl/MapController.ctrl.js"></script>
-    <script src="/scripts/services/attacksFactory.js"></script>
-    <script src="/scripts/directives/map.directive.js"></script>
-    <script src="/bower_components/d3/d3.min.js"></script>
-    <script src="/bower_components/topojson/topojson.js"></script>
-    <script src="/bower_components/datamaps/dist/datamaps.world.min.js"></script>
-</body>
+
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <a href="javasscript:void(0);" class="navbar-brand">Team 1</a>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">Attack Url:</div>
+                <div class="col-md-6">
+                    <input type="text" ng-model="attackUrl" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                Attack stats here
+            </div>
+            <div class="row">
+                Defense stats
+                <br/>
+                <map-display></map-display>
+            </div>
+        </div>
+
+        <script src="/bower_components/angular/angular.min.js"></script>
+        <script src="/scripts/app.js"></script>
+        <script src="/scripts/ctrl/MainController.ctrl.js"></script>
+        <script src="/scripts/ctrl/MapController.ctrl.js"></script>
+        <script src="/scripts/services/attacksFactory.js"></script>
+        <script src="/scripts/directives/map.directive.js"></script>
+        <script src="/bower_components/d3/d3.min.js"></script>
+        <script src="/bower_components/topojson/topojson.js"></script>
+        <script src="/bower_components/datamaps/dist/datamaps.world.min.js"></script>
+    </body>
 
 </html>
