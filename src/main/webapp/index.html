@@ -19,9 +19,15 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">Attack Url:</div>
-                <div class="col-md-6">
+                <div class="col-md-1">Attack Url:</div>
+                <div class="col-md-3">
                     <input type="text" ng-model="attackUrl" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <button ng-click="attack()" class="btn btn-primary">Attack!</button>
+                </div>
+                <div class="col-md-3">
+                    <button ng-click="stop()" class="btn btn-primary">Stop</button>
                 </div>
             </div>
             <div class="row">
