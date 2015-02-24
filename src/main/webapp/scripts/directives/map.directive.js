@@ -39,7 +39,9 @@ app.directive('mapDisplay', ['$interval', 'attacksService', function($interval, 
                     return {
                         latitude: x['latitude'],
                         longitude: x['longitude'],
-                        name: x['name']
+                        name: x['userId'],
+                        radius:5,
+                        fillKey:'blue'
                     }
                 })
                 map.bubbles(bubbles);

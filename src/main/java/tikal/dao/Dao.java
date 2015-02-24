@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 import tikal.model.Checkin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,15 +15,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Repository
 public class Dao {
 
-	private final Jedis jedis = new Jedis("localhost");
+	private final JedisPool pool = new JedisPool(new JedisPoolConfig(), "localhost");
 	
 	private final ObjectMapper mapper = new ObjectMapper();
 	
 	private static final String LAST_KEYS = "lastkeys";
 	
-	private static final long MAX_KEYS_LENGTH = 10L;
+	private static final long MAX_KEYS_LENGTH = 1000L;
 	
 	public void insertChecking(Checkin checkin) throws Exception {
+
+		Jedis jedis = pool.getResource();
 		
 		String json = mapper.writeValueAsString(checkin);
 		
@@ -35,19 +39,25 @@ public class Dao {
 			jedis.lpop(LAST_KEYS);
 		}
 		
+		pool.returnResource(jedis);
+		
 	}
 	
 	public List<Checkin> getLastAttacks() throws Exception {
 		
+		Jedis jedis = pool.getResource();
+		
 		List<String> keys = jedis.lrange(LAST_KEYS, 0, -1);
-		if(keys.isEmpty()) {
-			return new ArrayList<>();
-		}
-		List<String> jsonList = jedis.mget(keys.toArray(new String[]{}));
+		
 		List<Checkin> result = new ArrayList<>();
-		for(String json : jsonList) {
-			result.add(mapper.readValue(json, Checkin.class));
+
+		if(!keys.isEmpty()) {
+			List<String> jsonList = jedis.mget(keys.toArray(new String[]{}));
+			for(String json : jsonList) {
+				result.add(mapper.readValue(json, Checkin.class));
+			}
 		}
+		pool.returnResource(jedis);
 		return result;
 	}
 }
