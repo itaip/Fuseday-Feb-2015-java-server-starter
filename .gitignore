@@ -5,4 +5,5 @@ build/
 .idea/
 .gradle/
 src/main/webapp/node_modules/
+src/main/webapp/bower_components/
 bin/

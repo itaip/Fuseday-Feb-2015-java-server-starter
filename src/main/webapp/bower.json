@@ -1,0 +1,20 @@
+{
+  "name": "webapp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tikalk/Fuseday-Feb-2015-java-server-starter",
+  "authors": [
+    "robiferentz <robiferentz@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13"
+  }
+}
