@@ -6,9 +6,10 @@ angular.module('fuse-team1.controllers')
         "use strict";
 
         $scope.mapMsg = 'Hi';
+        $scope.attackThreads = 10;
 
         $scope.attack = function(){
-            $http.post('/attack/' + $scope.attackIP + '/10').success(function(res){
+            $http.post('/attack/' + $scope.attackIP + '/' + $scope.attackThreads).success(function(res){
                 console.log('Attack started.');
             });
         };
