@@ -27,4 +27,9 @@ public class CheckinController {
 		dao.insertChecking(checkin);
 		return true;
 	}
+	
+	@RequestMapping(value="/attacks", method=RequestMethod.GET)
+	public Object attacks() throws Exception {
+		return dao.getLastAttacks();
+	}
 }
