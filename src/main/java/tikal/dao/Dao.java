@@ -1,15 +1,15 @@
 package tikal.dao;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import redis.clients.jedis.Jedis;
 import tikal.model.Checkin;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableMap;
 
 @Repository
 public class Dao {
@@ -20,11 +20,7 @@ public class Dao {
 	
 	private static final String LAST_KEYS = "lastkeys";
 	
-	private static final long MAX_KEYS_LENGTH = 1000000L;
-	
-	public Dao() {
-		
-	}
+	private static final long MAX_KEYS_LENGTH = 10L;
 	
 	public void insertChecking(Checkin checkin) throws Exception {
 		
@@ -40,5 +36,16 @@ public class Dao {
 			jedis.lpop(LAST_KEYS);
 		}
 		
+	}
+	
+	public List<Checkin> getLastAttacks() throws Exception {
+		
+		List<String> keys = jedis.lrange(LAST_KEYS, 0, -1);
+		List<String> jsonList = jedis.mget(keys.toArray(new String[]{}));
+		List<Checkin> result = new ArrayList<>();
+		for(String json : jsonList) {
+			result.add(mapper.readValue(json, Checkin.class));
+		}
+		return result;
 	}
 }
