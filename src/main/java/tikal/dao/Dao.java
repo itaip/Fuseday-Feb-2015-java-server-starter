@@ -21,7 +21,7 @@ public class Dao {
 	
 	private static final String LAST_KEYS = "lastkeys";
 	
-	private static final long MAX_KEYS_LENGTH = 10L;
+	private static final long MAX_KEYS_LENGTH = 1000L;
 	
 	public void insertChecking(Checkin checkin) throws Exception {
 

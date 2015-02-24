@@ -40,7 +40,7 @@ app.directive('mapDisplay', ['$interval', 'attacksService', function($interval, 
                         latitude: x['latitude'],
                         longitude: x['longitude'],
                         name: x['userId'],
-                        radius:25,
+                        radius:5,
                         fillKey:'blue'
                     }
                 })
