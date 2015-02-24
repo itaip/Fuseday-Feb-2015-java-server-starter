@@ -1,5 +1,5 @@
 var app = angular.module('fuse-team1.directives');
-app.directive('mapDisplay', [function() {
+app.directive('mapDisplay', ['$interval', 'attacksService', function($interval, attacksService) {
     // Runs during compile
     return {
         // name: '',
@@ -14,32 +14,37 @@ app.directive('mapDisplay', [function() {
         // replace: true,
         // transclude: true,
         // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-        link: function($scope, iElm, iAttrs, controller) {
-            var map = new Datamap({
-                element: document.getElementById('container')
-            });
-            map.bubbles([{
-                name: 'Castle Bravo',
-                radius: 25,
-                yeild: 15000,
-                country: 'USA',
-                significance: 'First dry fusion fuel "staged" thermonuclear weapon; a serious nuclear fallout accident occurred',
-                fillKey: 'USA',
-                date: '1954-03-01',
-                latitude: 11.415,
-                longitude: 165.1619
-            }, {
-                name: 'Tsar Bomba',
-                radius: 70,
-                yeild: 50000,
-                country: 'USSR',
-                fillKey: 'RUS',
-                significance: 'Largest thermonuclear weapon ever tested—scaled down from its initial 100 Mt design by 50%',
-                date: '1961-10-31',
-                latitude: 73.482,
-                longitude: 54.5854
-            }]);
-
-        }
+        link: linkFunc
     };
+
+    function linkFunc($scope, elem) {
+        var map = new Datamap({
+            element: document.getElementById('container'),
+            fills: {
+                defaultFill: '#000',
+                blue: 'red'
+            },
+            geographyConfig: {
+                highlightOnHover: true,
+                popupOnHover: false,
+                borderColor: '#63233d',
+                highlightFillColor: '#e45785',
+                borderWidth: 1
+            }
+        });
+
+        $interval(function() {
+            attacksService.getAttacks().then(function(result) {
+                debugger;
+                // map.bubbles([{
+                //     name: 'aaa',
+                //     radius: 10,
+                //     latitude: lats[Math.floor(Math.random() * 4)],
+                //     longitude: longs[Math.floor(Math.random() * 4)],
+                //     fillKey: 'blue'
+                // }])
+            });
+
+        }, 200);
+    }
 }]);

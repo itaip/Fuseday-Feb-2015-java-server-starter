@@ -1,5 +1,17 @@
 #container {
     position: relative;
-    width: 500px;
-    height: 300px;
+    width: 1000px;
+    height: 500px;
+    margin: 0px auto;
+}
+body {
+    padding-top: 0px;
+    background: #40a0e9;
+    background-image: url("/assets/home_pattern_70.png");
+    background-image: url("/assets/home_pattern_70.png"), -webkit-gradient(linear, left top, left bottom, from(#318AE5), to(#50B8ED));
+    background-image: url("/assets/home_pattern_70.png"), -webkit-linear-gradient(top, #318AE5, #50B8ED);
+    background-image: url("/assets/home_pattern_70.png"), -moz-linear-gradient(top, #318AE5, #50B8ED);
+    background-image: url("/assets/home_pattern_70.png"), -ms-linear-gradient(top, #318AE5, #50B8ED);
+    background-image: url("/assets/home_pattern_70.png"), -o-linear-gradient(top, #318AE5, #50B8ED);
+    background-image: url("/assets/home_pattern_70.png"), linear-gradient(to bottom, #318AE5, #50B8ED);
 }

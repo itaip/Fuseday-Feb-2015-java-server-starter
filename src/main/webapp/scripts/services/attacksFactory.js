@@ -1,4 +1,11 @@
-angular.module('fuse-team1.services').factory("attacksFactory", function() {
+angular.module('fuse-team1.services').factory("attacksService", ['$http', function($http) {
 
-    return {};
-});
+    return {
+        getAttacks: function() {
+            return $http({
+                method: 'GET',
+                url: '/attacks'
+            });
+        }
+    };
+}]);
