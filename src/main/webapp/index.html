@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html ng-app="fuse-team1">
+
 <head lang="en">
     <meta charset="UTF-8">
     <title>Attack and Destroy</title>
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/client/app.js"></script>
-    <script src="/client/ctrl/MainController.ctrl.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
+
 <body ng-controller="MainController">
-{{msg}}
+
+    <map-display></map-display>
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/ctrl/MainController.ctrl.js"></script>
+    <script src="/scripts/ctrl/MapController.ctrl.js"></script>
+    <script src="/scripts/services/attacksFactory.js"></script>
+    <script src="/scripts/directives/map.directive.js"></script>
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src="/bower_components/topojson/topojson.js"></script>
+    <script src="/bower_components/datamaps/dist/datamaps.world.min.js"></script>
 </body>
+
 </html>
