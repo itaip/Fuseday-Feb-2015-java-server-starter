@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import tikal.model.Checkin;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
