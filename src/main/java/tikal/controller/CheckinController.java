@@ -21,7 +21,7 @@ public class CheckinController {
 	}
 	
 	@RequestMapping(value="/checkin",method=RequestMethod.POST)
-	public Object checkin(@RequestBody final Checkin checkin) {
+	public Object checkin(@RequestBody final Checkin checkin) throws Exception {
 		checkin.setTimestamp(System.currentTimeMillis());
 		System.out.println(checkin);
 		dao.insertChecking(checkin);

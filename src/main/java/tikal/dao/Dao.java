@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import tikal.model.Checkin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 
 @Repository
@@ -15,17 +16,29 @@ public class Dao {
 
 	private final Jedis jedis = new Jedis("localhost");
 	
+	private final ObjectMapper mapper = new ObjectMapper();
+	
+	private static final String LAST_KEYS = "lastkeys";
+	
+	private static final long MAX_KEYS_LENGTH = 1000000L;
+	
 	public Dao() {
 		
 	}
 	
-	public void insertChecking(Checkin checkin) {
+	public void insertChecking(Checkin checkin) throws Exception {
 		
-		Map<String, String> hash = ImmutableMap.of(
-				"latitude", String.valueOf(checkin.getLatitude()),
-				"longitude", String.valueOf(checkin.getLongitude()),
-				"userId", checkin.getUserId(),
-				"timestamp", String.valueOf(checkin.getTimestamp()));
-		jedis.hmset(UUID.randomUUID().toString(), hash);
+		String json = mapper.writeValueAsString(checkin);
+		
+		String key = checkin.getTimestamp() + "." + checkin.getUserId();
+		
+		jedis.set(key, json);
+		
+		jedis.lpush(LAST_KEYS, key);
+		
+		if(jedis.llen(LAST_KEYS) > MAX_KEYS_LENGTH) {
+			jedis.lpop(LAST_KEYS);
+		}
+		
 	}
 }
