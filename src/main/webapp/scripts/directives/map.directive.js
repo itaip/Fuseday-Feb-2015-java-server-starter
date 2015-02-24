@@ -35,16 +35,16 @@ app.directive('mapDisplay', ['$interval', 'attacksService', function($interval, 
 
         $interval(function() {
             attacksService.getAttacks().then(function(result) {
-                debugger;
-                // map.bubbles([{
-                //     name: 'aaa',
-                //     radius: 10,
-                //     latitude: lats[Math.floor(Math.random() * 4)],
-                //     longitude: longs[Math.floor(Math.random() * 4)],
-                //     fillKey: 'blue'
-                // }])
+                var bubbles = result.data.map(function(x) {
+                    return {
+                        latitude: x['latitude'],
+                        longitude: x['longitude'],
+                        name: x['name']
+                    }
+                })
+                map.bubbles(bubbles);
             });
 
-        }, 200);
+        }, 1000);
     }
 }]);
