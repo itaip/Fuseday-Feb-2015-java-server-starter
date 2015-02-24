@@ -40,6 +40,9 @@ public class Dao {
 	public List<Checkin> getLastAttacks() throws Exception {
 		
 		List<String> keys = jedis.lrange(LAST_KEYS, 0, -1);
+		if(keys.isEmpty()) {
+			return new ArrayList<>();
+		}
 		List<String> jsonList = jedis.mget(keys.toArray(new String[]{}));
 		List<Checkin> result = new ArrayList<>();
 		for(String json : jsonList) {
